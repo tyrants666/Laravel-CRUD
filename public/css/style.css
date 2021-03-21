@@ -1,10 +1,13 @@
 
 
-/* .navbar {
-    background-color: #4CAF50;
-} */
+.navbar {
+    background-color: #242424;
+}
 .navbar a {
     font-weight: 500;
+}
+a.navbar-brand {
+    /* color: #fff !important; */
 }
 .pill {
     background: #e91e63;
