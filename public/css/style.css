@@ -1,0 +1,28 @@
+
+
+/* .navbar {
+    background-color: #4CAF50;
+} */
+.navbar a {
+    font-weight: 500;
+}
+.pill {
+    background: #e91e63;
+    border-radius: 25px;
+    padding: 3px 12px;
+    box-shadow: 0px 1px 7px 0px #e91e63a8;
+    border: 1px solid #e91e63;
+}
+.pill li > a {
+    color: #fff !important;
+}
+
+
+/* RESPONSIVE
+-------------------------------------------------------- */
+
+@media (min-width:768px) {
+    .navbar {
+        padding: 1rem;
+    }
+}
