@@ -54,6 +54,7 @@
                         @else
                             <li class="flex-v-center mr-3"> <a class="nav-link" href="{{url('/home')}}">Home</a> </li>
                             <li class="flex-v-center mr-4"> <a class="nav-link" href="{{url('/posts')}}">Posts</a> </li>
+                            <li class="flex-v-center mr-4"> <a class="nav-link" href="{{url('/posts/create')}}">Create</a> </li>
                             <li class="nav-item dropdown pill">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
