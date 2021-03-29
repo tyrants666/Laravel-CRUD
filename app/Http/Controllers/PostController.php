@@ -48,7 +48,17 @@ class PostController extends Controller
           'title' => 'required|unique:posts|max:255',
           'content' => 'required',
           'author' => 'required',
+          'image' => 'mimes:jpeg,png,jpg,gif,svg|max:5048',
         ]);
+
+        ////////////////  File Storage ////////////////
+        if($request->hasFile('image')){
+            $fileNameExt = $request->file('image')->getClientOriginalName();
+            $fileName = pathinfo($fileNameExt, PATHINFO_FILENAME);
+            $fileExt = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$fileExt;
+            $pathToStore = $request->file('image')->storeAs('public/images',$fileNameToStore);
+        }
 
 
         $post = new Post();
@@ -56,7 +66,11 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->author = $request->author;
         $category = ($request->category) ? $request->category : 'General';
-          $post->category = $category;
+        $post->category = $category;
+        if($request->hasFile('image')){
+            $post->post_img = $fileNameToStore;
+            // $post->post_img = $request->file('image')->store('image');  
+        }
         $post->user_id = auth()->user()->id;
         $post->save();
 
@@ -84,7 +98,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        //return view("update-posts", compact ('','post'));
     }
 
     /**

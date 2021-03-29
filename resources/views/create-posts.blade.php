@@ -9,7 +9,7 @@
     <h1>Please Login First</h1>
   @else
     @include('layouts.messages')
-    <form action="{{url('/posts')}}" method="post">
+    <form action="{{url('/posts')}}" method="post" >
       @csrf
         <fieldset>
         <legend>Legend</legend>
@@ -19,6 +19,10 @@
             <input type="text" name="content"  class=" border form-control-plaintext" placeholder="Post content" style="height: 200px;">
             <input type="text" name="author"  class=" border form-control-plaintext" placeholder="Author">
             <input type="text" name="category"  class=" border form-control-plaintext" placeholder="Category">
+            <div class="upload-img my-2 form-group">
+              <label for="image" >Upload Image</label>
+              <input type="file" name="image" />
+            </div>
           </div>
         </div>
 
