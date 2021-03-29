@@ -63,10 +63,16 @@ a.navbar-brand {
     box-shadow: 1px 1px 9px 1px #adcce4;
         border: 1px solid rgb(108 178 235);
 }
+.post-card .card-header {
+    font-size: 20px;
+    font-weight: 800;
+}
 .post-card img {
-    width: auto;
-    max-width: 100%;
+    width: 100%;
     margin: auto;
+    object-fit: cover;
+    height: 278px;
+    object-position: top;
 }
 
 /* UPDATE POST PAGE
