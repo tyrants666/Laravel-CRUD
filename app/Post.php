@@ -12,5 +12,6 @@ class Post extends Model
                         'category',
                         'author',
                       ];
+  // protected $guarded = [];
 }
  

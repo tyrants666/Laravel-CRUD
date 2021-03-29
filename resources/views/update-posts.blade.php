@@ -23,14 +23,14 @@
           </div>
         </div>
         </fieldset>
-        <button type="submit" class="btn btn-primary">Update Submit</button>
+        <button type="submit" class="btn btn-primary btn-round">Update Submit</button>
 
     </form>
 
     <form class="" action="{{url("/posts/$post->id")}}" method="post">
       @csrf
       <input type="hidden" name="_method" value="DELETE">
-      <button class="btn-danger" type="submit" name="button">Delete</button>
+      <button class="btn-danger btn-round" type="submit" name="button">Delete</button>
     </form>
 
   @endguest

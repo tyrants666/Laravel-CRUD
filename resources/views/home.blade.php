@@ -10,6 +10,7 @@
     <a href="{{url('/posts/create')}}"> <li>Create Post</li> </a>
     <a href="{{url('/posts')}}"> <li>View Posts</li> </a>
     <a href="{{url('/posts')}}"> <li>Update Posts</li> </a>
+    <li>Total Posts : {{\DB::table('posts')->count()}} </li>
   </ul>
 </div>
 
