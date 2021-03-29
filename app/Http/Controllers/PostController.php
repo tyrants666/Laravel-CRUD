@@ -56,7 +56,8 @@ class PostController extends Controller
             $fileNameExt = $request->file('image')->getClientOriginalName();
             $fileName = pathinfo($fileNameExt, PATHINFO_FILENAME);
             $fileExt = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore = $fileName.'_'.time().'.'.$fileExt;
+            $fileNameToStore = $fileName.'_'.$fileExt;
+            // $fileNameToStore = $fileName.'_'.time().'.'.$fileExt;
             $pathToStore = $request->file('image')->storeAs('public/images',$fileNameToStore);
         }
 
@@ -117,13 +118,25 @@ class PostController extends Controller
           'content'=>'required',
           'author'=>'required',
           'category'=>'required',
+          'image' => 'mimes:jpeg,png,jpg,gif,svg|max:5048',
         ]);
+
+        if($request->hasFile('image')){
+            $fileNameExt1 = $request->file('image')->getClientOriginalName();
+            $fileName1 = pathinfo($fileNameExt1, PATHINFO_FILENAME);
+            $fileExt1 = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore1 = $fileName1.'_'.time().'.'.$fileExt1;
+            $pathToStore1 = $request->file('image')->storeAs('public/images',$fileNameToStore1);
+        }
 
         $update_post = $post;
         $update_post->title = $request->title;
         $update_post->content = $request->content;
         $update_post->author = $request->author;
         $update_post->category = ($request->category) ? $request->category : "General";
+        if($request->hasFile('image') && $update_post->post_img !== $fileNameToStore1){
+            $update_post->post_img = $fileNameToStore1;
+        }
         $update_post->save();
 
         return redirect("posts/$post->id")->with('message','POST SUCCESSFULLY UPDATED');
