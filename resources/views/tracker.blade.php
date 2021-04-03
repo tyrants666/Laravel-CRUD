@@ -26,17 +26,20 @@
                     {{-- Input Fields
                     -------------------------------------------------------- --}}
                     <div class="form-group">
-                        <label for="p-startdate">Period start date:</label>
+                        <label for="p-startdate">Period start date :</label>
                         <input type="date" class="form-control" id="p-startdate" name="p-startdate">
                     </div>
 
                     <div class="form-group">
-                        <label for="flowdays">Total Flow day:</label>
-                        <input type="number" class="form-control" id="flowdays" name="flowdays">
+                        <label for="flowdays">Total Flow day :</label>
+                        <input type="number" class="form-control" id="flowdays" name="flowdays" placeholder="Enter total flow days">
                     </div>
 
                     <div class="result-date form-group">
                         <label>Your Predicted date is : <span class="show-date"></span></label>
+                    </div>
+                    <div class="error form-group">
+                        <label>Please enter all details</label>
                     </div>
 
                     {{-- Submit button
@@ -58,10 +61,16 @@
 
 @section('css')
     <style>
-        .result-date {
+        .result-date{
             display: none;
         }
         .result-date .show-date{
+            color: #e91e63;
+        }
+        .error {
+            display: none;
+        }
+        .error label{
             color: #e91e63;
         }
         .popup {
@@ -97,6 +106,8 @@
             var result_date = $('.result-date');
             var show_date = $('.show-date');
 
+            var error = $('.error');
+
             // Calculate Period date on click  ----------------------------------
             $('#track').click(function (e) {
                 e.preventDefault(); 
@@ -112,29 +123,36 @@
                 // Get value from Total flow days input field
                 total_flowdays = $('#flowdays').val();
 
-                // Covert string to integer
-                total_flowdays = parseInt(total_flowdays, 10);
-                
-                // Adding total flowday to 1 period cycle
-                total_days = total_flowdays + 28;
+                if (period_startdate && total_flowdays) {
 
-                // Set final date after adding total days
-                period_startdate.setDate(period_startdate.getDate() + total_days);
+                    // Covert string to integer
+                    total_flowdays = parseInt(total_flowdays, 10);
+                    // Adding total flowday to 1 period cycle
+                    total_days = total_flowdays + 28;
+                    // Set final date after adding total days
+                    period_startdate.setDate(period_startdate.getDate() + total_days);
+                    //Convert date format to dd-mm-yy & store in finaldate variable
+                    finaldate = period_startdate.toInputFormat();
+                    //Send final date inside popup / result date label
+                    show_date.text(finaldate);
 
-                //Convert date format to dd-mm-yy & store in finaldate variable
-                finaldate = period_startdate.toInputFormat();
+                    //Show popup $ result date DIV
+                    // popup.fadeIn();
+                    result_date.show();
 
-                //Send final date inside popup / result date label
-                show_date.text(finaldate);
+                    //Hide Error message if any
+                    error.hide();
 
-                //Show popup $ result date DIV
-                // popup.fadeIn();
-                result_date.show();
+                    //Hide popup after timeout
+                    setTimeout(() => {
+                        popup.fadeOut();
+                        //  result_date.fadeOut();
+                    }, 3000);
 
-                setTimeout(() => {
-                     popup.fadeOut();
-                    //  result_date.fadeOut();
-                }, 3000);
+                } else {
+                    error.show();
+                    result_date.hide();
+                }
                 
             }
 
